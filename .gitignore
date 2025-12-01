@@ -1,0 +1,10 @@
+# Ignorar todo
+/*
+
+# No ignorar el propio .gitignore
+!.gitignore
+
+# Re-admitir carpetas específicas
+!DOCS
+!SQL
+!SSIS

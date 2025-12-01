@@ -1,0 +1,2053 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2025 10:05:32 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-I8I22C2"
+  DTS:CreatorName="DESKTOP-I8I22C2\angel"
+  DTS:DTSID="{557E4B38-E523-43C7-9687-AA25DA08A2C2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="10250"
+  DTS:ObjectName="Clientes1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="38"
+  DTS:VersionGUID="{63EA61E9-7F43-4E74-8231-A528770332A8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.BancoDigital_DWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2D0DBB81-7A9E-4FA2-8746-8B1ABD6B6ACC}"
+      DTS:ObjectName="LocalHost.BancoDigital_DWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=BancoDigital_DWH;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{2D0DBB81-7A9E-4FA2-8746-8B1ABD6B6ACC}LocalHost.BancoDigital_DWH;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OLEDB_BancoDigital_OLTP]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{EE523F47-85B8-4C2D-BB15-CAD75B4A65C5}"
+      DTS:ObjectName="OLEDB_BancoDigital_OLTP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=BancoDigital_OLTP;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{EE523F47-85B8-4C2D-BB15-CAD75B4A65C5}LocalHost.BancoDigital_OLTP;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FBE4B33D-23AD-40F0-B8B8-0CBD2DA7BE79}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="Contador_Cambios">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0860DAEA-CC16-49A9-8D7F-85F8B77EFDB4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LSN_From_Clientes">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3259C883-2E47-45CA-815F-95DD8DFDFE7D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LSN_To_Clientes">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{09D3E460-5D50-4154-8E10-A8F47B1DBF90}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQL_Query_Clientes">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT TOP 20 ClienteID, NombreCompleto, Email,Telefono, FechaNacimiento, EstadoCivil, FechaRegistro, UltimaModificacion, 2 AS CDC_Operation FROM BancoDigital_OLTP.dbo.Clientes</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Contenedor de secuencias"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contenedor de secuencias"
+      DTS:DTSID="{D1F095EC-1CB5-42D2-B056-606794E40AB7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Contenedor de secuencias">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Actualiza LSN_Control"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{773896A2-3015-4123-8BCB-410828ADEB5F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Actualiza LSN_Control"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2D0DBB81-7A9E-4FA2-8746-8B1ABD6B6ACC}"
+              SQLTask:SqlStatementSource="UPDATE dbo.CDC_Control&#xA;SET &#xA;    UltimoLSN = ?,&#xA;    UltimaFechaProceso = GETDATE()&#xA;WHERE TablaOrigen = 'dbo_Clientes';" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::LSN_To_Clientes"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="22" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Cargar_Dim_Cliente"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{87938413-6A7F-4B88-9EF6-62AE72E24060}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Cargar_Dim_Cliente"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2D0DBB81-7A9E-4FA2-8746-8B1ABD6B6ACC}"
+              SQLTask:SqlStatementSource="BEGIN TRANSACTION;&#xA;&#xA;BEGIN TRY&#xA;    -- PASO 1: DELETEs&#xA;    DELETE FROM dbo.Dim_Clientes&#xA;    WHERE ClienteID IN (&#xA;        SELECT ClienteID &#xA;        FROM CDC_Staging.Clientes_Changes &#xA;        WHERE CDC_Operation = 1&#xA;    );&#xA;&#xA;    -- PASO 2: INSERTs (solo si no existe ya en Dim_Clientes)&#xA;    INSERT INTO dbo.Dim_Clientes (&#xA;        ClienteID, NombreCompleto, Email, Telefono,&#xA;        FechaNacimiento, EstadoCivil, FechaRegistro, UltimaActualizacion&#xA;    )&#xA;    SELECT &#xA;        s.ClienteID, s.NombreCompleto, s.Email, s.Telefono,&#xA;        s.FechaNacimiento, s.EstadoCivil, s.FechaRegistro, GETDATE()&#xA;    FROM CDC_Staging.Clientes_Changes s&#xA;    WHERE s.CDC_Operation = 2&#xA;      AND NOT EXISTS (&#xA;          SELECT 1 &#xA;          FROM dbo.Dim_Clientes d &#xA;          WHERE d.ClienteID = s.ClienteID&#xA;      );&#xA;&#xA;    -- PASO 3: UPDATEs&#xA;    UPDATE t&#xA;    SET &#xA;        t.NombreCompleto = s.NombreCompleto,&#xA;        t.Email = s.Email,&#xA;        t.Telefono = s.Telefono,&#xA;        t.FechaNacimiento = s.FechaNacimiento,&#xA;        t.EstadoCivil = s.EstadoCivil,&#xA;        t.FechaRegistro = s.FechaRegistro,&#xA;        t.UltimaActualizacion = GETDATE()&#xA;    FROM dbo.Dim_Clientes t&#xA;    INNER JOIN CDC_Staging.Clientes_Changes s&#xA;        ON t.ClienteID = s.ClienteID&#xA;    WHERE s.CDC_Operation = 4;&#xA;&#xA;    COMMIT TRANSACTION;&#xA;END TRY&#xA;BEGIN CATCH&#xA;    ROLLBACK TRANSACTION;&#xA;    DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();&#xA;    DECLARE @ErrorSeverity INT = ERROR_SEVERITY();&#xA;    DECLARE @ErrorState INT = ERROR_STATE();&#xA;    RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState);&#xA;END CATCH;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Construir_Query_CDC"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Tarea Script"
+          DTS:DTSID="{ECCC2436-FCD5-48BB-A550-0BB189A9F28C}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Construir_Query_CDC"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_fde937943f9949bcb40cbf9958b8f8f7"
+              VSTAMajorVersion="16"
+              VSTAMinorVersion="0"
+              Language="CSharp"
+              ReadOnlyVariables="User::LSN_From_Clientes,User::LSN_To_Clientes"
+              ReadWriteVariables="User::SQL_Query_Clientes">
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+#endregion
+
+namespace ST_fde937943f9949bcb40cbf9958b8f8f7
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+		/// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+		public void Main()
+		{
+            try
+            {
+                string fromLSN = Dts.Variables["User::LSN_From_Clientes"].Value.ToString();
+                string toLSN = Dts.Variables["User::LSN_To_Clientes"].Value.ToString();
+
+                string query;
+
+                if (fromLSN == "FIRST_TIME" || string.IsNullOrEmpty(fromLSN))
+                {
+                    query = string.Format(@"
+                        DECLARE @from_lsn BINARY(10), @to_lsn BINARY(10);
+                     -- Obtener el LSN m nimo (primera vez)
+                     SET @from_lsn = sys.fn_cdc_get_min_lsn('dbo_Clientes');
+                     SET @to_lsn = CONVERT(BINARY(10), '{0}', 1);
+                     -- Validar que hay un rango v lido
+                     IF @to_lsn IS NULL OR @from_lsn IS NULL OR @from_lsn > @to_lsn
+                     BEGIN
+                     -- No hay cambios que procesar
+                     SELECT TOP 0
+                        ClienteID, NombreCompleto, Email, Telefono,
+                        FechaNacimiento, EstadoCivil, FechaRegistro, 
+                        UltimaModificacion, __$operation AS CDC_Operation
+                     FROM cdc.dbo_Clientes_CT;
+                     END
+                     ELSE
+                     BEGIN
+                        -- Leer todos los cambios desde el inicio
+                     SELECT 
+                        ClienteID, NombreCompleto, Email, Telefono,
+                        FechaNacimiento, EstadoCivil, FechaRegistro, 
+                        UltimaModificacion, __$operation AS CDC_Operation
+                     FROM cdc.fn_cdc_get_all_changes_dbo_Clientes(@from_lsn, @to_lsn, 'all')
+                     ORDER BY __$start_lsn;
+                     END
+                        ", toLSN);
+
+                    MessageBox.Show("Primera Ejecucion detectada. Se procesaron todos los cambios historios.", "CDC - Primera ejecucion"
+                        , MessageBoxButtons.OK
+                        , MessageBoxIcon.Information);
+
+                }
+                else
+                {
+                    query = string.Format(@"
+                        DECLARE @from_lsn BINARY(10), @to_lsn BINARY(10);
+                SET @from_lsn = CONVERT(BINARY(10), '{0}', 1);
+                SET @to_lsn = CONVERT(BINARY(10), '{1}', 1);
+                -- Validar que hay un rango v lido
+                IF @to_lsn IS NULL OR @from_lsn IS NULL OR @from_lsn >= @to_lsn
+                BEGIN
+                    -- No hay cambios nuevos
+                    SELECT TOP 0
+                        ClienteID, NombreCompleto, Email, Telefono,
+                        FechaNacimiento, EstadoCivil, FechaRegistro, 
+                        UltimaModificacion, __$operation AS CDC_Operation
+                    FROM cdc.dbo_Clientes_CT;
+                END
+                ELSE
+                BEGIN
+                    -- Leer solo los cambios nuevos
+                    SELECT 
+                        ClienteID, NombreCompleto, Email, Telefono,
+                        FechaNacimiento, EstadoCivil, FechaRegistro, 
+                        UltimaModificacion, __$operation AS CDC_Operation
+                    FROM cdc.fn_cdc_get_net_changes_dbo_Clientes(@from_lsn, @to_lsn, 'all')
+                    ORDER BY __$start_lsn;
+                END
+                    ", fromLSN, toLSN);
+                }
+                Dts.Variables["User::LSN_From_Clientes"].Value= query;
+
+                Dts.TaskResult = (int)ScriptResults.Success;
+
+            }
+            catch (Exception ex)
+            {
+                Dts.Events.FireError(0, "Script CDC", "Error:" + ex.Message, "", 0);
+                Dts.TaskResult = (int)ScriptResults.Failure;
+            }
+		}
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+              <ProjectItem
+                Name="ST_fde937943f9949bcb40cbf9958b8f8f7.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3AC3AEDA-E5E6-4B90-A65D-AB27EC2DF911}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_fde937943f9949bcb40cbf9958b8f8f7</RootNamespace>
+    <AssemblyName>ST_fde937943f9949bcb40cbf9958b8f8f7</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST160</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>ST_fde937943f9949bcb40cbf9958b8f8f7</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>ST_fde937943f9949bcb40cbf9958b8f8f7</msb:DisplayName>
+    <msb:ProjectId>{86403173-CB46-4594-BEA5-4E04ECF16E36}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="ST_fde937943f9949bcb40cbf9958b8f8f7.csproj" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="ScriptMain.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_fde937943f9949bcb40cbf9958b8f8f7.Properties.Settings.get_Default():ST_fde937943f9949bcb40cbf9958b8f8f7.Properties.Sett" +
+    "ings")]
+
+namespace ST_fde937943f9949bcb40cbf9958b8f8f7.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_fde937943f9949bcb40cbf9958b8f8f7")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_fde937943f9949bcb40cbf9958b8f8f7")]
+[assembly: AssemblyCopyright("Copyright @  2025")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_fde937943f9949bcb40cbf9958b8f8f7.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_fde937943f9949bcb40cbf9958b8f8f7.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_fde937943f9949bcb40cbf9958b8f8f7.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_fde937943f9949bcb40cbf9958b8f8f7.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_fde937943f9949bcb40cbf9958b8f8f7.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_fde937943f9949bcb40cbf9958b8f8f7.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAOPs92gAAAAAAAAAAOAAIiALATAAACYAAAAIAAAAAAAAokUA
+AAAgAAAAYAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACgAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAFBFAABPAAAAAGAAAHgEAAAAAAAAAAAAAAAAAAAA
+AAAAAIAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAqCUAAAAgAAAAJgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAYAAAAAYAAAAoAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAIAAAAACAAAALgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACE
+RQAAAAAAAEgAAAACAAUAwCEAANgiAAABAAAAAAAAAJhEAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABswBgDpAAAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKbxQAAAoKAigQAAAKbxEAAApyMQAAcG8SAAAKbxMAAApvFAAACgsGcl0AAHAoFQAACi0IBigW
+AAAKLCFycwAAcAcoFwAACgxySgsAcHLbCwBwFh9AKBgAAAomKw1yCwwAcAYHKBkAAAoMAigQAAAK
+bxEAAApyAQAAcG8SAAAKCG8aAAAKAigQAAAKFm8bAAAK3jwNAigQAAAKbxwAAAoWcsIVAHBy2BUA
+cAlvHQAACigeAAAKcuYVAHAWbx8AAAomAigQAAAKF28bAAAK3gAqAAAAARAAAAAAAACsrAA8DwAA
+AR4CKCAAAAoqHgIoIQAACiqufgEAAAQtHnLoFQBw0AMAAAIoIgAACm8jAAAKcyQAAAqAAQAABH4B
+AAAEKhp+AgAABCoeAoACAAAEKhp+AwAABCoeAiglAAAKKi5zCAAABoADAAAEKgAAQlNKQgEAAQAA
+AAAADAAAAHY0LjAuMzAzMTkAAAAABQBsAAAAOAQAACN+AACkBAAAIAYAACNTdHJpbmdzAAAAAMQK
+AABcFgAAI1VTACAhAAAQAAAAI0dVSUQAAAAwIQAAqAEAACNCbG9iAAAAAAAAAAIAAAFXHaIBCQMA
+AAD6ATMAFgAAAQAAACQAAAAFAAAABgAAAAkAAAABAAAAJQAAAAIAAAAQAAAAAQAAAAIAAAADAAAA
+BAAAAAEAAAAFAAAAAQAAAAEAAAAAAIsDAQAAAAAABgAxApIEBgDAApIEBgB9AX8EDwAGBQAABgCq
+ARgEBgAUAhgEBgD1ARgEBgCnAhgEBgBRAhgEBgBqAhgEBgDBARgEBgDcAfgCCgCFAjoDCgD8ADoD
+BgAqBLwDBgDDA7wDBgBgAX8EBgC5BbwDBgBEBLIEBgA0BAMEDgAwAXUDDgCRAXUDDgAYAe4DBgBF
+AZIECgBjAzoDEgBIBacAEgB6AKcABgAUA7wDFgDtBVsFFgDMBVsFFgBwBVsFFgDfA1sFCgBUBDoD
+BgDHALwDBgCDALwDBgD8BRgEAAAAACUAAAAAAAEAAQABABAA1AMBADkAAQABAAAAEAC5BBUFSQAB
+AAMAAAEQAFIFFQVdAAMABwADAQAAkgUAAEEABAAKABEAyAOsABEA7ACwABEAXgC0AAYGTQC4AFaA
+ggW7AFaAzAC7AFAgAAAAAIYA2gMGAAEAWCEAAAAAhhhyBAYAAQBgIQAAAACDGHIEBgABAGghAAAA
+AJMIQAS/AAEAlCEAAAAAkwjUAMQAAQCbIQAAAACTCOAAyQABAKMhAAAAAJYIwAXPAAIAqiEAAAAA
+hhhyBAYAAgCyIQAAAACRGHgE1AACAAAAAQDyAgkAcgQBABEAcgQGABkAcgQKACkAcgQQADEAcgQQ
+ADkAcgQQAEEAcgQQAEkAcgQQAFEAcgQQAFkAcgQQAGEAcgQQAGkAcgQGAIkAcgQGALEAcgQVAMEA
+cgQGAHEAigUjAMkARAUoANEAswMtANkA3gIzAJEAEgM3AOEABQY7AOEAEQZBAOEAsgVGAOkA6AVM
+AOEAsgVYANkA6AJfAMkA2QUBAMkAoAVkAHkAbgA3AOEAqwVqAAkBaARwAHEAcgQGAJEAcgQGABEB
+lQB5ABEB+AWCAJkAcgSIALkAcgQGAAgAFACiAAgAGACnACkAcwAPAS4ACwDnAC4AEwDwAC4AGwAP
+AS4AIwAYAS4AKwBBAS4AMwBBAS4AOwBBAS4AQwAYAS4ASwBHAS4AUwBBAS4AWwBeAUMAYwCnAEkA
+cwAPAWEAewCnAGMAawCnABsAAwABAAQAAwAAAEQE2AAAAPQA3QAAAMQF4gACAAQAAwACAAUABQAB
+AAYABQACAAcABwAEgAAAAQAAANEkwWwAAAAAAAABAAAABAAAAAAAAAAAAAAAkABVAAAAAAAQAAAA
+AAAAAAAAAACZABsDAAAAAAQAAAAAAAAAAAAAAJAAvAMAAAAAEAAAAAAAAAAAAAAAmQAuAAAAAAAE
+AAAAAAAAAAAAAACQAFsFAAAAAAAAAAABAAAAwwQAAAUAAgAAAAAAAFNUX2ZkZTkzNzk0M2Y5OTQ5
+YmNiNDBjYmY5OTU4YjhmOGY3ADxNb2R1bGU+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERU
+UwB2YWx1ZV9fAG1zY29ybGliAGRlZmF1bHRJbnN0YW5jZQBnZXRfTWVzc2FnZQBWYXJpYWJsZQBS
+dW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0
+cy5SdW50aW1lAFR5cGUARmFpbHVyZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVyZQByZXNvdXJjZUN1
+bHR1cmUAVlNUQVJUU2NyaXB0T2JqZWN0TW9kZWxCYXNlAEFwcGxpY2F0aW9uU2V0dGluZ3NCYXNl
+AEVkaXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2Vy
+Tm9uVXNlckNvZGVBdHRyaWJ1dGUARGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVB
+dHRyaWJ1dGUAQXNzZW1ibHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0
+ZQBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRl
+AEFzc2VtYmx5RGVzY3JpcHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJp
+YnV0ZQBBc3NlbWJseVByb2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUA
+U1NJU1NjcmlwdFRhc2tFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0
+ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBnZXRfVmFsdWUAc2V0X1ZhbHVlAHZhbHVl
+AFN5c3RlbS5SdW50aW1lLlZlcnNpb25pbmcAVG9TdHJpbmcATWljcm9zb2Z0LlNxbFNlcnZlci5T
+Y3JpcHRUYXNrAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlRhc2tzLlNjcmlwdFRhc2sAU2NyaXB0
+T2JqZWN0TW9kZWwAU3lzdGVtLkNvbXBvbmVudE1vZGVsAFNUX2ZkZTkzNzk0M2Y5OTQ5YmNiNDBj
+YmY5OTU4YjhmOGY3LmRsbABnZXRfSXRlbQBTeXN0ZW0ARW51bQByZXNvdXJjZU1hbgBTY3JpcHRN
+YWluAE1lc3NhZ2VCb3hJY29uAFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5HbG9iYWxpemF0
+aW9uAFN5c3RlbS5SZWZsZWN0aW9uAEV4Y2VwdGlvbgBDdWx0dXJlSW5mbwBnZXRfUmVzb3VyY2VN
+YW5hZ2VyAEV2ZW50c09iamVjdFdyYXBwZXIARmlyZUVycm9yAC5jdG9yAC5jY3RvcgBTeXN0ZW0u
+RGlhZ25vc3RpY3MAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3Vy
+Y2VzAFNUX2ZkZTkzNzk0M2Y5OTQ5YmNiNDBjYmY5OTU4YjhmOGY3LlByb3BlcnRpZXMuUmVzb3Vy
+Y2VzLnJlc291cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTVF9mZGU5Mzc5NDNmOTk0OWJjYjQwY2JmOTk1
+OGI4ZjhmNy5Qcm9wZXJ0aWVzAGdldF9WYXJpYWJsZXMAU2V0dGluZ3MAU3lzdGVtLldpbmRvd3Mu
+Rm9ybXMATWVzc2FnZUJveEJ1dHRvbnMAU3VjY2VzcwBnZXRfRHRzAFNjcmlwdFJlc3VsdHMAZ2V0
+X0V2ZW50cwBDb25jYXQARm9ybWF0AE9iamVjdABnZXRfRGVmYXVsdABEaWFsb2dSZXN1bHQAc2V0
+X1Rhc2tSZXN1bHQAU2hvdwBNZXNzYWdlQm94AGdldF9Bc3NlbWJseQBvcF9FcXVhbGl0eQBJc051
+bGxPckVtcHR5AAAAL1UAcwBlAHIAOgA6AEwAUwBOAF8ARgByAG8AbQBfAEMAbABpAGUAbgB0AGUA
+cwAAK1UAcwBlAHIAOgA6AEwAUwBOAF8AVABvAF8AQwBsAGkAZQBuAHQAZQBzAAAVRgBJAFIAUwBU
+AF8AVABJAE0ARQAAitUNAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAg
+ACAAIAAgACAARABFAEMATABBAFIARQAgAEAAZgByAG8AbQBfAGwAcwBuACAAQgBJAE4AQQBSAFkA
+KAAxADAAKQAsACAAQAB0AG8AXwBsAHMAbgAgAEIASQBOAEEAUgBZACgAMQAwACkAOwANAAoAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAALQAtACAATwBiAHQAZQBuAGUA
+cgAgAGUAbAAgAEwAUwBOACAAbQAgAG4AaQBtAG8AIAAoAHAAcgBpAG0AZQByAGEAIAB2AGUAegAp
+AA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABTAEUAVAAgAEAA
+ZgByAG8AbQBfAGwAcwBuACAAPQAgAHMAeQBzAC4AZgBuAF8AYwBkAGMAXwBnAGUAdABfAG0AaQBu
+AF8AbABzAG4AKAAnAGQAYgBvAF8AQwBsAGkAZQBuAHQAZQBzACcAKQA7AA0ACgAgACAAIAAgACAA
+IAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABTAEUAVAAgAEAAdABvAF8AbABzAG4AIAA9
+ACAAQwBPAE4AVgBFAFIAVAAoAEIASQBOAEEAUgBZACgAMQAwACkALAAgACcAewAwAH0AJwAsACAA
+MQApADsADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAC0ALQAg
+AFYAYQBsAGkAZABhAHIAIABxAHUAZQAgAGgAYQB5ACAAdQBuACAAcgBhAG4AZwBvACAAdgAgAGwA
+aQBkAG8ADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAEkARgAg
+AEAAdABvAF8AbABzAG4AIABJAFMAIABOAFUATABMACAATwBSACAAQABmAHIAbwBtAF8AbABzAG4A
+IABJAFMAIABOAFUATABMACAATwBSACAAQABmAHIAbwBtAF8AbABzAG4AIAA+ACAAQAB0AG8AXwBs
+AHMAbgANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAQgBFAEcA
+SQBOAA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAtAC0AIABO
+AG8AIABoAGEAeQAgAGMAYQBtAGIAaQBvAHMAIABxAHUAZQAgAHAAcgBvAGMAZQBzAGEAcgANAAoA
+IAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAUwBFAEwARQBDAFQAIABU
+AE8AUAAgADAADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgAEMAbABpAGUAbgB0AGUASQBEACwAIABOAG8AbQBiAHIAZQBDAG8AbQBwAGwAZQB0AG8ALAAg
+AEUAbQBhAGkAbAAsACAAVABlAGwAZQBmAG8AbgBvACwADQAKACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAEYAZQBjAGgAYQBOAGEAYwBpAG0AaQBlAG4AdABv
+ACwAIABFAHMAdABhAGQAbwBDAGkAdgBpAGwALAAgAEYAZQBjAGgAYQBSAGUAZwBpAHMAdAByAG8A
+LAAgAA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABV
+AGwAdABpAG0AYQBNAG8AZABpAGYAaQBjAGEAYwBpAG8AbgAsACAAXwBfACQAbwBwAGUAcgBhAHQA
+aQBvAG4AIABBAFMAIABDAEQAQwBfAE8AcABlAHIAYQB0AGkAbwBuAA0ACgAgACAAIAAgACAAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABGAFIATwBNACAAYwBkAGMALgBkAGIAbwBfAEMA
+bABpAGUAbgB0AGUAcwBfAEMAVAA7AA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAg
+ACAAIAAgACAAIABFAE4ARAANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAARQBMAFMARQANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAg
+ACAAQgBFAEcASQBOAA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAtAC0AIABMAGUAZQByACAAdABvAGQAbwBzACAAbABvAHMAIABjAGEAbQBiAGkAbwBz
+ACAAZABlAHMAZABlACAAZQBsACAAaQBuAGkAYwBpAG8ADQAKACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAgACAAIAAgACAAIAAgAFMARQBMAEUAQwBUACAADQAKACAAIAAgACAAIAAgACAAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAEMAbABpAGUAbgB0AGUASQBEACwAIABOAG8A
+bQBiAHIAZQBDAG8AbQBwAGwAZQB0AG8ALAAgAEUAbQBhAGkAbAAsACAAVABlAGwAZQBmAG8AbgBv
+ACwADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAEYA
+ZQBjAGgAYQBOAGEAYwBpAG0AaQBlAG4AdABvACwAIABFAHMAdABhAGQAbwBDAGkAdgBpAGwALAAg
+AEYAZQBjAGgAYQBSAGUAZwBpAHMAdAByAG8ALAAgAA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAgACAAIAAgACAAIAAgACAAIABVAGwAdABpAG0AYQBNAG8AZABpAGYAaQBjAGEAYwBp
+AG8AbgAsACAAXwBfACQAbwBwAGUAcgBhAHQAaQBvAG4AIABBAFMAIABDAEQAQwBfAE8AcABlAHIA
+YQB0AGkAbwBuAA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABG
+AFIATwBNACAAYwBkAGMALgBmAG4AXwBjAGQAYwBfAGcAZQB0AF8AYQBsAGwAXwBjAGgAYQBuAGcA
+ZQBzAF8AZABiAG8AXwBDAGwAaQBlAG4AdABlAHMAKABAAGYAcgBvAG0AXwBsAHMAbgAsACAAQAB0
+AG8AXwBsAHMAbgAsACAAJwBhAGwAbAAnACkADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAgACAAIAAgAE8AUgBEAEUAUgAgAEIAWQAgAF8AXwAkAHMAdABhAHIAdABfAGwAcwBu
+ADsADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAEUATgBEAA0A
+CgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAABgI9QAHIA
+aQBtAGUAcgBhACAARQBqAGUAYwB1AGMAaQBvAG4AIABkAGUAdABlAGMAdABhAGQAYQAuACAAUwBl
+ACAAcAByAG8AYwBlAHMAYQByAG8AbgAgAHQAbwBkAG8AcwAgAGwAbwBzACAAYwBhAG0AYgBpAG8A
+cwAgAGgAaQBzAHQAbwByAGkAbwBzAC4AAC9DAEQAQwAgAC0AIABQAHIAaQBtAGUAcgBhACAAZQBq
+AGUAYwB1AGMAaQBvAG4AAYm1DQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAg
+ACAAIAAgACAAIAAgAEQARQBDAEwAQQBSAEUAIABAAGYAcgBvAG0AXwBsAHMAbgAgAEIASQBOAEEA
+UgBZACgAMQAwACkALAAgAEAAdABvAF8AbABzAG4AIABCAEkATgBBAFIAWQAoADEAMAApADsADQAK
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAUwBFAFQAIABAAGYAcgBvAG0AXwBsAHMA
+bgAgAD0AIABDAE8ATgBWAEUAUgBUACgAQgBJAE4AQQBSAFkAKAAxADAAKQAsACAAJwB7ADAAfQAn
+ACwAIAAxACkAOwANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABTAEUAVAAgAEAA
+dABvAF8AbABzAG4AIAA9ACAAQwBPAE4AVgBFAFIAVAAoAEIASQBOAEEAUgBZACgAMQAwACkALAAg
+ACcAewAxAH0AJwAsACAAMQApADsADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAA
+LQAtACAAVgBhAGwAaQBkAGEAcgAgAHEAdQBlACAAaABhAHkAIAB1AG4AIAByAGEAbgBnAG8AIAB2
+ACAAbABpAGQAbwANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABJAEYAIABAAHQA
+bwBfAGwAcwBuACAASQBTACAATgBVAEwATAAgAE8AUgAgAEAAZgByAG8AbQBfAGwAcwBuACAASQBT
+ACAATgBVAEwATAAgAE8AUgAgAEAAZgByAG8AbQBfAGwAcwBuACAAPgA9ACAAQAB0AG8AXwBsAHMA
+bgANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABCAEUARwBJAE4ADQAKACAAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAtAC0AIABOAG8AIABoAGEAeQAgAGMA
+YQBtAGIAaQBvAHMAIABuAHUAZQB2AG8AcwANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAg
+ACAAIAAgACAAIAAgAFMARQBMAEUAQwBUACAAVABPAFAAIAAwAA0ACgAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABDAGwAaQBlAG4AdABlAEkARAAsACAATgBv
+AG0AYgByAGUAQwBvAG0AcABsAGUAdABvACwAIABFAG0AYQBpAGwALAAgAFQAZQBsAGUAZgBvAG4A
+bwAsAA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABG
+AGUAYwBoAGEATgBhAGMAaQBtAGkAZQBuAHQAbwAsACAARQBzAHQAYQBkAG8AQwBpAHYAaQBsACwA
+IABGAGUAYwBoAGEAUgBlAGcAaQBzAHQAcgBvACwAIAANAAoAIAAgACAAIAAgACAAIAAgACAAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAVQBsAHQAaQBtAGEATQBvAGQAaQBmAGkAYwBhAGMA
+aQBvAG4ALAAgAF8AXwAkAG8AcABlAHIAYQB0AGkAbwBuACAAQQBTACAAQwBEAEMAXwBPAHAAZQBy
+AGEAdABpAG8AbgANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAEYA
+UgBPAE0AIABjAGQAYwAuAGQAYgBvAF8AQwBsAGkAZQBuAHQAZQBzAF8AQwBUADsADQAKACAAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAARQBOAEQADQAKACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAgACAARQBMAFMARQANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABC
+AEUARwBJAE4ADQAKACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAtAC0A
+IABMAGUAZQByACAAcwBvAGwAbwAgAGwAbwBzACAAYwBhAG0AYgBpAG8AcwAgAG4AdQBlAHYAbwBz
+AA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAUwBFAEwARQBDAFQA
+IAANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAQwBs
+AGkAZQBuAHQAZQBJAEQALAAgAE4AbwBtAGIAcgBlAEMAbwBtAHAAbABlAHQAbwAsACAARQBtAGEA
+aQBsACwAIABUAGUAbABlAGYAbwBuAG8ALAANAAoAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAARgBlAGMAaABhAE4AYQBjAGkAbQBpAGUAbgB0AG8ALAAgAEUA
+cwB0AGEAZABvAEMAaQB2AGkAbAAsACAARgBlAGMAaABhAFIAZQBnAGkAcwB0AHIAbwAsACAADQAK
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAFUAbAB0AGkA
+bQBhAE0AbwBkAGkAZgBpAGMAYQBjAGkAbwBuACwAIABfAF8AJABvAHAAZQByAGEAdABpAG8AbgAg
+AEEAUwAgAEMARABDAF8ATwBwAGUAcgBhAHQAaQBvAG4ADQAKACAAIAAgACAAIAAgACAAIAAgACAA
+IAAgACAAIAAgACAAIAAgACAAIABGAFIATwBNACAAYwBkAGMALgBmAG4AXwBjAGQAYwBfAGcAZQB0
+AF8AbgBlAHQAXwBjAGgAYQBuAGcAZQBzAF8AZABiAG8AXwBDAGwAaQBlAG4AdABlAHMAKABAAGYA
+cgBvAG0AXwBsAHMAbgAsACAAQAB0AG8AXwBsAHMAbgAsACAAJwBhAGwAbAAnACkADQAKACAAIAAg
+ACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIABPAFIARABFAFIAIABCAFkAIABfAF8A
+JABzAHQAYQByAHQAXwBsAHMAbgA7AA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAg
+AEUATgBEAA0ACgAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAARVTAGMA
+cgBpAHAAdAAgAEMARABDAAANRQByAHIAbwByADoAAAEAcVMAVABfAGYAZABlADkAMwA3ADkANAAz
+AGYAOQA5ADQAOQBiAGMAYgA0ADAAYwBiAGYAOQA5ADUAOABiADgAZgA4AGYANwAuAFAAcgBvAHAA
+ZQByAHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAAADCeZUPPPJcQovza3YbruImAAQgAQEI
+AyAAAQUgAQEREQQgAQEOBSABARFVBwcEDg4OEj0EIAASZQQgABJpBSABEm0cAyAAHAMgAA4FAAIC
+Dg4EAAECDgUAAg4OHAsABBF5Dg4RfRGAgQYAAw4OHBwEIAEBHAUgABKAhQUAAg4ODgggBQIIDg4O
+CAgAARKAiRGAjQUgABKAkQcgAgEOEoCRCLd6XFYZNOCJCImEXc2AgMyRBAAAAAAEAQAAAAMGEk0D
+BhJRAwYSEAIGCAMGERQEAAASTQQAABJRBQABARJRBAAAEhADAAABBAgAEk0ECAASUQQIABIQCAEA
+CAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAQgBAAIAAAAAACgBACNTVF9mZGU5
+Mzc5NDNmOTk0OWJjYjQwY2JmOTk1OGI4ZjhmNwAABQEAAAAAFgEAEUNvcHlyaWdodCBAICAyMDI1
+AABJAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjcBAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1l
+Ei5ORVQgRnJhbWV3b3JrIDQuN7QAAADOyu++AQAAAJEAAABsU3lzdGVtLlJlc291cmNlcy5SZXNv
+dXJjZVJlYWRlciwgbXNjb3JsaWIsIFZlcnNpb249NC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQ
+dWJsaWNLZXlUb2tlbj1iNzdhNWM1NjE5MzRlMDg5I1N5c3RlbS5SZXNvdXJjZXMuUnVudGltZVJl
+c291cmNlU2V0AgAAAAAAAAAAAAAAUEFEUEFEULQAAAB4RQAAAAAAAAAAAACSRQAAACAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAhEUAAAAAAAAAAAAAAABfQ29yRGxsTWFpbgBtc2NvcmVlLmRsbAAAAAAA
+/yUAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAA
+GAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhgAAAa
+BAAAAAAAAAAAAAAaBDQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv/gAA
+AQAAAAEAwWzRJAAAAQDBbNEkPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYAYQBy
+AEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAAALAE
+egMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAVgMAAAEAMAAwADAAMAAwADQAYgAw
+AAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkATgBhAG0A
+ZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAFQAXwBm
+AGQAZQA5ADMANwA5ADQAMwBmADkAOQA0ADkAYgBjAGIANAAwAGMAYgBmADkAOQA1ADgAYgA4AGYA
+OABmADcAAAA+AA8AAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AOQA0ADIANQAu
+ADIANwA4ADQAMQAAAAAAcAAoAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABTAFQAXwBmAGQA
+ZQA5ADMANwA5ADQAMwBmADkAOQA0ADkAYgBjAGIANAAwAGMAYgBmADkAOQA1ADgAYgA4AGYAOABm
+ADcALgBkAGwAbAAAAEgAEgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkA
+cgBpAGcAaAB0ACAAQAAgACAAMgAwADIANQAAACoAAQABAEwAZQBnAGEAbABUAHIAYQBkAGUAbQBh
+AHIAawBzAAAAAAAAAAAAeAAoAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0AZQAAAFMA
+VABfAGYAZABlADkAMwA3ADkANAAzAGYAOQA5ADQAOQBiAGMAYgA0ADAAYwBiAGYAOQA5ADUAOABi
+ADgAZgA4AGYANwAuAGQAbABsAAAAaAAkAAEAUAByAG8AZAB1AGMAdABOAGEAbQBlAAAAAABTAFQA
+XwBmAGQAZQA5ADMANwA5ADQAMwBmADkAOQA0ADkAYgBjAGIANAAwAGMAYgBmADkAOQA1ADgAYgA4
+AGYAOABmADcAAABCAA8AAQBQAHIAbwBkAHUAYwB0AFYAZQByAHMAaQBvAG4AAAAxAC4AMAAuADkA
+NAAyADUALgAyADcAOAA0ADEAAAAAAEYADwABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBv
+AG4AAAAxAC4AMAAuADkANAAyADUALgAyADcAOAA0ADEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAMAAAApDUAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarea Flujo de datos"
+          DTS:DTSID="{CFFAB2F2-2B28-45A0-8AA6-A1C443081A1C}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DFT_Carga_Datos_CDC_Clientes"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Columna derivada;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+                  description="Crea nuevos valores de columna aplicando expresiones a las columnas de entrada de la transformación. Crea nuevas columnas o sobrescribe las columnas existentes. Por ejemplo, se concatenan los valores de las columnas 'nombre' y 'apellidos' para crear una columna 'nombre completo'."
+                  name="Columna derivada"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Inputs[Entrada de columna derivada]"
+                      description="Entrada en la transformación Columna derivada"
+                      name="Entrada de columna derivada">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de columna derivada]"
+                      description="Salida predeterminada de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      name="Salida de columna derivada"
+                      synchronousInputId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaCargaCDC]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Cálculo"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaCargaCDC]"
+                          name="FechaCargaCDC"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión de columna derivada"
+                              name="Expression">[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Expresión descriptiva de columna derivada"
+                              expressionType="Notify"
+                              name="FriendlyExpression">GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de error de columna derivada]"
+                      description="Salida de error de la transformación Columna derivada"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de columna derivada"
+                      synchronousInputId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Inputs[Entrada de columna derivada]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de error de columna derivada].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino de OLE DB"
+                  name="Destino de OLE DB"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[CDC_Staging].[Clientes_Changes]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadOptions">TABLOCK</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost.BancoDigital_DWH]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost.BancoDigital_DWH]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                      errorOrTruncationOperation="Insertar"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de destino de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[ClienteID]"
+                          cachedDataType="i4"
+                          cachedName="ClienteID"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ClienteID]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ClienteID]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[NombreCompleto]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="NombreCompleto"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreCompleto]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NombreCompleto]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Email]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="150"
+                          cachedName="Email"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Email]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Email]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Telefono]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="Telefono"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Telefono]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Telefono]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[FechaNacimiento]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="FechaNacimiento"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaNacimiento]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaNacimiento]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[EstadoCivil]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="EstadoCivil"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[EstadoCivil]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EstadoCivil]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[FechaRegistro]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="FechaRegistro"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaRegistro]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaRegistro]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[UltimaModificacion]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="UltimaModificacion"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[UltimaModificacion]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[UltimaModificacion]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[CDC_Operation]"
+                          cachedDataType="i4"
+                          cachedName="CDC_Operation"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[CDC_Operation]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CDC_Operation]" />
+                        <inputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[FechaCargaCDC]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="FechaCargaCDC"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaCargaCDC]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de columna derivada].Columns[FechaCargaCDC]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ClienteID]"
+                          dataType="i4"
+                          name="ClienteID" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[NombreCompleto]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="NombreCompleto" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Email]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="Email" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Telefono]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="Telefono" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaNacimiento]"
+                          dataType="wstr"
+                          length="10"
+                          name="FechaNacimiento" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[EstadoCivil]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="EstadoCivil" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaRegistro]"
+                          dataType="dbTimeStamp"
+                          name="FechaRegistro" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[UltimaModificacion]"
+                          dataType="dbTimeStamp"
+                          name="UltimaModificacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[CDC_Operation]"
+                          dataType="i4"
+                          name="CDC_Operation" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[FechaCargaCDC]"
+                          dataType="dbTimeStamp"
+                          name="FechaCargaCDC" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de destino de OLE DB"
+                      synchronousInputId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origen de OLE DB"
+                  name="Origen de OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="Variable que contiene el comando SQL para ejecutar."
+                      name="SqlCommandVariable">User::SQL_Query_Clientes</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.String"
+                      description="Asignaciones entre los parámetros del comando SQL y las variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[OLEDB_BancoDigital_OLTP]"
+                      connectionManagerRefId="Package.ConnectionManagers[OLEDB_BancoDigital_OLTP]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                      name="Salida de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ClienteID]"
+                          name="ClienteID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NombreCompleto]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreCompleto]"
+                          length="200"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[NombreCompleto]"
+                          name="NombreCompleto"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Email]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Email]"
+                          length="150"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Email]"
+                          name="Email"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Telefono]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Telefono]"
+                          length="20"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Telefono]"
+                          name="Telefono"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaNacimiento]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaNacimiento]"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaNacimiento]"
+                          name="FechaNacimiento"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EstadoCivil]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[EstadoCivil]"
+                          length="20"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[EstadoCivil]"
+                          name="EstadoCivil"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaRegistro]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaRegistro]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[FechaRegistro]"
+                          name="FechaRegistro"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[UltimaModificacion]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[UltimaModificacion]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[UltimaModificacion]"
+                          name="UltimaModificacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CDC_Operation]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CDC_Operation]"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[CDC_Operation]"
+                          name="CDC_Operation"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ClienteID]"
+                          dataType="i4"
+                          name="ClienteID" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[NombreCompleto]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="NombreCompleto" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Email]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          name="Email" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Telefono]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="Telefono" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaNacimiento]"
+                          dataType="wstr"
+                          length="10"
+                          name="FechaNacimiento" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[EstadoCivil]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="EstadoCivil" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[FechaRegistro]"
+                          dataType="dbTimeStamp"
+                          name="FechaRegistro" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[UltimaModificacion]"
+                          dataType="dbTimeStamp"
+                          name="UltimaModificacion" />
+                        <externalMetadataColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[CDC_Operation]"
+                          dataType="i4"
+                          name="CDC_Operation" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                      isErrorOut="true"
+                      name="Salida de error de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ClienteID]"
+                          name="ClienteID" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NombreCompleto]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[NombreCompleto]"
+                          name="NombreCompleto" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Email]"
+                          codePage="1252"
+                          dataType="str"
+                          length="150"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Email]"
+                          name="Email" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Telefono]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Telefono]"
+                          name="Telefono" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaNacimiento]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaNacimiento]"
+                          name="FechaNacimiento" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[EstadoCivil]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[EstadoCivil]"
+                          name="EstadoCivil" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaRegistro]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[FechaRegistro]"
+                          name="FechaRegistro" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[UltimaModificacion]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[UltimaModificacion]"
+                          name="UltimaModificacion" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CDC_Operation]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[CDC_Operation]"
+                          name="CDC_Operation" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Recuento de filas"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Recuento de filas;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;0"
+                  description="Cuenta las filas a medida que pasan por un flujo de datos. Por ejemplo, se usa el número de filas procesadas para determinar si deben o no realizarse operaciones de limpieza o actualizar el texto de un mensaje de correo electrónico para comunicar el estado de procesamiento."
+                  name="Recuento de filas">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el recuento de filas."
+                      name="VariableName">User::Contador_Cambios</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Recuento de filas.Inputs[Entrada de Recuento de filas 1]"
+                      hasSideEffects="true"
+                      name="Entrada de Recuento de filas 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Recuento de filas.Outputs[Salida de Recuento de filas 1]"
+                      name="Salida de Recuento de filas 1"
+                      synchronousInputId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Recuento de filas.Inputs[Entrada de Recuento de filas 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes.Paths[Salida de columna derivada]"
+                  endId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Recuento de filas.Inputs[Entrada de Recuento de filas 1]"
+                  name="Salida de columna derivada"
+                  startId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Outputs[Salida de columna derivada]" />
+                <path
+                  refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes.Paths[Salida de origen de OLE DB]"
+                  endId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada.Inputs[Entrada de columna derivada]"
+                  name="Salida de origen de OLE DB"
+                  startId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+                <path
+                  refId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes.Paths[Salida de Recuento de filas 1]"
+                  endId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  name="Salida de Recuento de filas 1"
+                  startId="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Recuento de filas.Outputs[Salida de Recuento de filas 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Limpieza_TABLA_CDC_CLientes"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{4F234E38-0E17-4A53-8407-473154E589BC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Limpieza_TABLA_CDC_CLientes"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2D0DBB81-7A9E-4FA2-8746-8B1ABD6B6ACC}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE CDC_Staging.Clientes_Changes;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\SQL_Obtener_LSN_Control_DWH"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{E3DA06A0-EF0A-464B-ABE3-30336275628C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL_Obtener_LSN_Control_DWH"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{2D0DBB81-7A9E-4FA2-8746-8B1ABD6B6ACC}"
+              SQLTask:SqlStatementSource="SELECT &#xA;    ISNULL(UltimoLSN, 'FIRST_TIME') AS FromLSN_String&#xA;FROM dbo.CDC_Control &#xA;WHERE TablaOrigen = 'dbo_Clientes';"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="FromLSN_String"
+                SQLTask:DtsVariableName="User::LSN_From_Clientes" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\SQL_Obtener_LSN_Maximo_OLTP"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{2652D0F0-96B4-418D-9410-2D65EFCF1200}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL_Obtener_LSN_Maximo_OLTP"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{EE523F47-85B8-4C2D-BB15-CAD75B4A65C5}"
+              SQLTask:SqlStatementSource="SELECT &#xA;    ISNULL(&#xA;        CONVERT(VARCHAR(22), sys.fn_cdc_get_max_lsn(), 1),&#xA;        '0x00000000000000000000'&#xA;    ) AS ToLSN_String;"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="ToLSN_String"
+                SQLTask:DtsVariableName="User::LSN_To_Clientes" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción]"
+          DTS:CreationName=""
+          DTS:DTSID="{89375414-3372-4C48-B932-E9A3D8A3E2EA}"
+          DTS:From="Package\Contenedor de secuencias\SQL_Obtener_LSN_Control_DWH"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción"
+          DTS:To="Package\Contenedor de secuencias\SQL_Obtener_LSN_Maximo_OLTP" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{70661C61-14FC-416E-9B26-325D4A9918D1}"
+          DTS:From="Package\Contenedor de secuencias\SQL_Obtener_LSN_Maximo_OLTP"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 1"
+          DTS:To="Package\Contenedor de secuencias\Construir_Query_CDC" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{976983DB-C0D8-49E7-99C6-E4D8D1673A9D}"
+          DTS:From="Package\Contenedor de secuencias\Construir_Query_CDC"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 2"
+          DTS:To="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{225C29CC-0A8E-42D7-A020-B96CCBC51D80}"
+          DTS:From="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 3"
+          DTS:To="Package\Contenedor de secuencias\Cargar_Dim_Cliente" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{60CB2BFE-24F5-4DC8-ADAC-23DC8311323A}"
+          DTS:From="Package\Contenedor de secuencias\Cargar_Dim_Cliente"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 4"
+          DTS:To="Package\Contenedor de secuencias\Actualiza LSN_Control" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{A09D9EB0-71A8-47B0-8E4D-EDE766165BC3}"
+          DTS:From="Package\Contenedor de secuencias\Actualiza LSN_Control"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción 5"
+          DTS:To="Package\Contenedor de secuencias\Limpieza_TABLA_CDC_CLientes" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Contenedor de secuencias\Actualiza LSN_Control"
+          TopLeft="64,426" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Contenedor de secuencias\Cargar_Dim_Cliente"
+          TopLeft="58,336" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Contenedor de secuencias\Construir_Query_CDC"
+          TopLeft="52,161" />
+        <NodeLayout
+          Size="247,42"
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes"
+          TopLeft="53,250" />
+        <NodeLayout
+          Size="244,42"
+          Id="Package\Contenedor de secuencias\Limpieza_TABLA_CDC_CLientes"
+          TopLeft="85,511" />
+        <NodeLayout
+          Size="248,42"
+          Id="Package\Contenedor de secuencias\SQL_Obtener_LSN_Control_DWH"
+          TopLeft="28,22" />
+        <NodeLayout
+          Size="254,42"
+          Id="Package\Contenedor de secuencias\SQL_Obtener_LSN_Maximo_OLTP"
+          TopLeft="24,92" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción]"
+          TopLeft="151.5,64">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 1]"
+          TopLeft="149,134">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27"
+              Start="0,0"
+              End="0,19.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 2]"
+          TopLeft="147,203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.5,47"
+              Start="0,0"
+              End="29.5,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="4,23.5" />
+                  <mssgle:LineSegment
+                    End="25.5,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.5,23.5"
+                    Point2="29.5,23.5"
+                    Point3="29.5,27.5" />
+                  <mssgle:LineSegment
+                    End="29.5,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 3]"
+          TopLeft="176.5,292">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-29,44"
+              Start="0,0"
+              End="-29,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="-4,22" />
+                  <mssgle:LineSegment
+                    End="-25,22" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-25,22"
+                    Point2="-29,22"
+                    Point3="-29,26" />
+                  <mssgle:LineSegment
+                    End="-29,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 4]"
+          TopLeft="147.5,378">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.5,48"
+              Start="0,0"
+              End="11.5,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="7.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.5,24"
+                    Point2="11.5,24"
+                    Point3="11.5,28" />
+                  <mssgle:LineSegment
+                    End="11.5,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias.PrecedenceConstraints[Restricción 5]"
+          TopLeft="159,468">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48,43"
+              Start="0,0"
+              End="48,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="4,21.5" />
+                  <mssgle:LineSegment
+                    End="44,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="44,21.5"
+                    Point2="48,21.5"
+                    Point3="48,25.5" />
+                  <mssgle:LineSegment
+                    End="48,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="334,608"
+          Size="334,651"
+          Id="Package\Contenedor de secuencias"
+          TopLeft="228,61" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB"
+          TopLeft="191,94" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB"
+          TopLeft="315,386" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Columna derivada"
+          TopLeft="220,198" />
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Recuento de filas"
+          TopLeft="257,290" />
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes.Paths[Salida de Recuento de filas 1]"
+          TopLeft="339,332">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="63.5,54"
+              Start="0,0"
+              End="63.5,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="4,27" />
+                  <mssgle:LineSegment
+                    End="59.5,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="59.5,27"
+                    Point2="63.5,27"
+                    Point3="63.5,31" />
+                  <mssgle:LineSegment
+                    End="63.5,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes.Paths[Salida de origen de OLE DB]"
+          TopLeft="276,136">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="28,62"
+              Start="0,0"
+              End="28,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="4,31" />
+                  <mssgle:LineSegment
+                    End="24,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24,31"
+                    Point2="28,31"
+                    Point3="28,35" />
+                  <mssgle:LineSegment
+                    End="28,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes.Paths[Salida de columna derivada]"
+          TopLeft="304,240">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="35,50"
+              Start="0,0"
+              End="35,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21"
+                    Point2="0,25"
+                    Point3="4,25" />
+                  <mssgle:LineSegment
+                    End="31,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31,25"
+                    Point2="35,25"
+                    Point3="35,29" />
+                  <mssgle:LineSegment
+                    End="35,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Contenedor de secuencias\DFT_Carga_Datos_CDC_Clientes\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
