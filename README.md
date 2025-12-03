@@ -76,10 +76,12 @@ SCD2 / CDC para historización e ingestión incremental.
 
 ## 🖼 Imágenes
 
-### Control Flow ETL Maestro ![Control Flow](./IMAGES/etl_master_control_flow.png)
+### Control Flow ETL Maestro
+<img src="IMAGES/etl_master_control_flow.png" alt="ETL Master ControlFlow" width="700"/>
 
-### Data Flow Ventas ![Data Flow Ventas](./IMAGES/data_flow_ventas.png)
 
+### Data Flow Ventas 
+<img src="IMAGES/data_flow_ventas.png" alt="dataflow ventas" width="700"/>
 ---
 
 ## 👤 Autor
