@@ -59,8 +59,11 @@ Los sistemas operacionales son heterogéneos y presentan inconsistencias en form
                 │  Dimensiones + FactVentas  │
                 │  Índices y optimizaciones  │
                 └────────────────────────────┘
+```
+---
 
-🛠 Tecnologías
+## 🛠 Tecnologías
+
 SQL Server para DWH y almacenamiento.
 
 SSIS para orquestación y paquetes ETL.
@@ -69,11 +72,15 @@ T-SQL para transformaciones y validaciones.
 
 SCD2 / CDC para historización e ingestión incremental.
 
-🖼 Imágenes
+---
+
+## 🖼 Imágenes
 
 Control Flow ETL Maestro ![Control Flow](./Images/etl_master_control_flow.png)
 
 Data Flow Ventas ![Data Flow Ventas](./Images/data_flow_ventas.png)
 
-👤 Autor
+---
+
+## 👤 Autor
 Angel Teodoro Jaramillo Sulca Data engineer 
